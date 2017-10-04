@@ -1,0 +1,14 @@
+:host {
+    display: block;
+    height: calc(100% - 80px);
+    display: flex;
+    flex-direction: row;
+}
+
+ml-list {
+    flex: 0 0 350px;
+}
+
+.movie-details {
+    flex: 1 1 auto;
+}
