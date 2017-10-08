@@ -1,25 +1,20 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { LOAD_MOVIES } from '../movies-actions';
+import { State } from '../movies-reducers';
+import { FakeStore } from '../../shared/testing/fakeStore';
 import { MoviesListComponent } from './movies-list.component';
 
 describe('MoviesListComponent', () => {
   let component: MoviesListComponent;
-  let fixture: ComponentFixture<MoviesListComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MoviesListComponent ]
-    })
-    .compileComponents();
-  }));
+  let fakeStore: FakeStore<State>
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MoviesListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fakeStore = new FakeStore<State>();
+    component = new MoviesListComponent(fakeStore as any);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should load movies during initialization', () => {
+    component.ngOnInit();
+    expect(fakeStore.dispatch).toHaveBeenCalled();
+    expect(fakeStore.dispatch.calls.argsFor(0)[0]['type']).toEqual(LOAD_MOVIES);
   });
 });

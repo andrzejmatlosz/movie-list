@@ -1,3 +1,3 @@
-<div class="movie-item-list" [class.selected]="movie?.isSelected">
+<div class="movie-item-list" [class.selected]="movie?.isSelected" [class.odd]="index % 2">
   {{movie?.title}}
 </div>

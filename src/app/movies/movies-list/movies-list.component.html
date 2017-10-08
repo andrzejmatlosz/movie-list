@@ -1,8 +1,9 @@
 <ml-list [items]="movies$ | async" [onScrollEndHandler]="fetchMoreMovies">
-  <ng-template let-movie="item">
-    <ml-movie-list-item [movie]="movie"></ml-movie-list-item>
+  <ng-template let-movie="item" let-index="index">
+    <ml-movie-list-item [movie]="movie" [index]="index"></ml-movie-list-item>
   </ng-template>
 </ml-list>
+<ml-search></ml-search>
 <div class="movie-details">
   <router-outlet></router-outlet>
 <div>

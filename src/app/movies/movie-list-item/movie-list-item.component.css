@@ -1,18 +1,28 @@
 :host {
   display: block;
-  height: 30px;
+  height: 40px;
   cursor: pointer;
-  border-bottom: 1px solid #ccc;
-}
-
-.movie-item-list:hover {
-  background: #ccc;
 }
 
 .movie-item-list {
-  padding: 5px 15px;
+  padding: 12px 15px;
+  white-space: nowrap;
+  overflow:hidden !important;
+  text-overflow: ellipsis;
+  background: white;
+  height: 100%;
 }
 
-.selected {
-  background: skyblue;
+.movie-item-list.odd {
+  background: #eee;
+}
+
+.movie-item-list:hover {
+  background: #8eb1c7;
+  color: white;
+}
+
+.movie-item-list.selected {
+  background: #0e2e33;
+  color: white;
 }

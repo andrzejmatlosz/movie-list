@@ -14,6 +14,7 @@ import * as moviesActions from '../movies-actions';
 export class MovieListItemComponent {
 
   @Input() public movie: Movie;
+  @Input() public index: number;
 
   constructor(private router: Router, private store: Store<moviesReducers.State>) { }
 

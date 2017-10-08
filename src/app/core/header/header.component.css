@@ -2,6 +2,7 @@
     display: block;
     height: 80px;
     font-size: 29px;
-    padding: 20px 15px;
-    border-bottom: 1px solid #ccc;
+    padding: 25px 15px;
+    background: black;
+    color: #ccc;
 }

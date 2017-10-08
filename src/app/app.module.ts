@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { StoreModule, combineReducers } from '@ngrx/store';
@@ -11,7 +11,9 @@ import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { reducer } from './movies/movies-reducers';
 import { MoviesEffects } from './movies/movies-effects';
-import { MoviesService } from './movies/movies.service'; 
+import { MoviesService } from './movies/movies.service';
+import { ErrorModalService } from './shared/error-modal/error-modal.service';
+import { GlobalErrorHandler } from './core/error-handler'; 
 
 @NgModule({
   declarations: [
@@ -26,7 +28,14 @@ import { MoviesService } from './movies/movies.service';
     StoreModule.forRoot({ movies: reducer }),
     EffectsModule.forRoot([MoviesEffects])
   ],
-  providers: [MoviesService],
+  providers: [
+    MoviesService, 
+    ErrorModalService,
+    {
+      provide: ErrorHandler, 
+      useClass: GlobalErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

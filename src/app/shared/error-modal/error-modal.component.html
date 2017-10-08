@@ -1,0 +1,6 @@
+<div *ngIf="visible" class="dialog">
+  <div class="dialog__header"><i class="material-icons">error</i>{{header}}</div>
+  <i class="material-icons dialog__close-btn" (click)="close()">close</i>
+  <div class="dialog__content">{{content}}</div>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

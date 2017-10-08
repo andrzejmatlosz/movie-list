@@ -7,6 +7,10 @@ export interface State {
   loaded: boolean;
   loading: boolean;
   movies: Movie[];
+  query: string;
+  searched: boolean;
+  searching: boolean;
+  searchMovies: Movie[]
   selectedMovie: Movie
 }
 
@@ -14,6 +18,10 @@ const initialState: State = {
   loaded: false,
   loading: false,
   movies: [],
+  query: '',
+  searched: false,
+  searching: false,
+  searchMovies: [],
   selectedMovie: null
 };
 
@@ -25,7 +33,7 @@ export function reducer(
     case moviesActions.LOAD_MOVIES: {
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     }
 
@@ -34,7 +42,40 @@ export function reducer(
         ...state,
         loaded: true,
         loading: false,
-        movies: [ ...state.movies, ...action.payload ],
+        movies: [ ...state.movies, ...action.payload ]
+      };
+    }
+
+    case moviesActions.LOAD_MOVIES_FAIL: {
+      return {
+        ...state,
+        loaded: false,
+        loading: false
+      };
+    }
+
+    case moviesActions.SEARCH_MOVIES: {
+      return {
+        ...state,
+        query: action.payload,
+        searching: true
+      };
+    }
+
+    case moviesActions.SEARCH_MOVIES_SUCCESS: {
+      return {
+        ...state,
+        searched: true,
+        searching: false,
+        searchMovies: [ ...action.payload ]
+      };
+    }
+
+    case moviesActions.SEARCH_MOVIES_FAIL: {
+      return {
+        ...state,
+        searched: false,
+        searching: false,
       };
     }
 
@@ -69,6 +110,10 @@ export const getMoviesState = createFeatureSelector<State>('movies');
 export const getMoviesListState = createSelector(
   getMoviesState,
   (state: State) => state.movies
+);
+export const getSearchMoviesListState = createSelector(
+  getMoviesState,
+  (state: State) => state.searchMovies
 );
 export const getSelectedMovie = createSelector(
   getMoviesState,

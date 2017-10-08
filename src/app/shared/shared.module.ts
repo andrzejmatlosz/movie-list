@@ -5,6 +5,8 @@ import { VirtualScrollModule } from 'angular2-virtual-scroll';
 
 import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
+import { RatingComponent } from './rating/rating.component';
+import { ErrorModalComponent } from './error-modal/error-modal.component';
 
 @NgModule({
   imports: [
@@ -14,11 +16,15 @@ import { ListComponent } from './list/list.component';
   ],
   declarations: [
     HomeComponent, 
-    ListComponent
+    ListComponent, 
+    RatingComponent, 
+    ErrorModalComponent
   ],
   exports: [
     HomeComponent, 
-    ListComponent
+    ListComponent,
+    RatingComponent,
+    ErrorModalComponent
   ]
 })
 export class SharedModule { }

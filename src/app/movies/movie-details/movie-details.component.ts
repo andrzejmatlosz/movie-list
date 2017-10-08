@@ -8,7 +8,6 @@ import { Movie } from '../movie';
 import { POSTER_URL } from '../../core/configuration';
 
 @Component({
-  selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css']
 })
@@ -19,14 +18,18 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   private movieSubscription: Subscription;
   private posterUrl: string;
 
-  constructor(private store: Store<moviesReducers.State>) { 
+  constructor(private store: Store<moviesReducers.State>, private router: Router) { 
     this.posterUrl = POSTER_URL;
   }
 
   public ngOnInit() {
     this.movieSubscription = this.store.select(moviesReducers.getSelectedMovie).subscribe((movie: Movie) => {
-      this.movie = movie;
-    })
+      if (!movie) {
+        this.router.navigate(['/movies']);
+      } else {
+        this.movie = movie;
+      }
+    });
   }
 
   public ngOnDestroy() {

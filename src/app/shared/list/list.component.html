@@ -1,6 +1,6 @@
 <virtual-scroll [items]="items" (update)="viewPortItems = $event" (end)="onScrollEnd($event)">
-    <div class="list-item" *ngFor="let item of viewPortItems">
-      <div [ngTemplateOutlet]="innerTemplate" [ngOutletContext]="{item: item}">
+    <div class="list-item" *ngFor="let item of viewPortItems let i = index">
+      <div [ngTemplateOutlet]="innerTemplate" [ngOutletContext]="{item: item, index: i}">
       </div>
     </div>
 </virtual-scroll>
